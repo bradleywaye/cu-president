@@ -1,6 +1,8 @@
 name: cu-president
 recipe: pantheon
 config:
+  php: '8.3'
+  xdebug: false
   framework: drupal8
   site: cu-president
   id: 11a7b30d-198a-494e-9e6d-d6622a328330
