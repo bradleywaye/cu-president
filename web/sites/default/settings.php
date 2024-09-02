@@ -83,14 +83,11 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
   }
 }
 
-// Automatically generated include for settings managed by ddev.
-$ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
-if (is_readable($ddev_settings) && getenv('IS_DDEV_PROJECT') == 'true') {
-  require $ddev_settings;
-}
-
 $settings['config_sync_directory'] = '../config/default';
 $config['config_split.config_split.local']['status'] = TRUE;
+
+# Provide universal absolute path to the installation.
+$conf['simplesamlphp_auth_installdir'] = $_ENV['HOME'] .'/code/private/simplesamlphp';
 
 if (defined('PANTHEON_ENVIRONMENT')) {
   $config['config_split.config_split.pantheon']['status'] = TRUE;
