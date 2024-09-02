@@ -1,0 +1,153 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the SASS Starterkit subtheme.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_form_system_theme_settings_alter() for settings form.
+ *
+ * Replace Barrio setting options with subtheme ones.
+ */
+function cu_pres_barrio_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+  $form['components']['navbar']['bootstrap_barrio_navbar_top_background']['#options'] = array(
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  );
+  $form['components']['navbar']['bootstrap_barrio_navbar_background']['#options'] = array(
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  );
+}
+
+
+/**
+ * Implements template_theme_suggestions_block_alter().
+ */
+function cu_pres_barrio_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  $elements = $variables['elements'];
+  // Provide suggestion for block templates by custom block type.
+  if (!empty($elements['content']['#block_content'])) {
+    $block = $elements['content']['#block_content'];
+    // Add `block--BLOCK-TYPE.html.twig`.
+    $suggestions[] = 'block__' . $block->bundle();
+    $view_mode = $elements['#configuration']['view_mode'];
+    if (!empty($view_mode)) {
+      // Add `block--BLOCK-TYPE--VIEW-MODE.html.twig`.
+      $suggestions[] = 'block__' . $block->bundle() . '__' . $view_mode;
+    }
+  }  
+}
+
+/**
+ * Implements hook_theme_suggestions_taxonomy_term_alter().
+ */
+function cu_pres_barrio_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
+  /** @var \Drupal\taxonomy\TermInterface $term */
+  $term = $variables['elements']['#taxonomy_term'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+  // Add view mode theme suggestions.
+  $suggestions[] = 'taxonomy_term__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->id() . '__' . $sanitized_view_mode;
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function cu_pres_barrio_preprocess_page(&$variables) {
+  $variables['logo'] = theme_get_setting('logo.url');
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function cu_pres_barrio_page_attachments_alter(&$page) { 
+  // Add web fonts from fonts.com
+  /*$element = array(
+    '#tag' => 'link', // The #tag is the html tag - <link />
+    '#attributes' => array( // Set up an array of attributes inside the tag
+      'href' => '//fast.fonts.net/cssapi/86696b99-fb1a-4964-9676-9233fb4fca8f.css',
+      'rel' => 'stylesheet',
+      'type' => 'text/css',
+    ),
+  );
+  $page['#attached']['html_head'][] = [$element, 'web_fonts'];*/
+  $element = array(
+    '#tag' => 'link', // The #tag is the html tag - <link />
+    '#attributes' => array( // Set up an array of attributes inside the tag
+      'href' => '//fonts.googleapis.com/css2?family=PT+Serif:ital@1&display=swap',
+      'rel' => 'stylesheet',
+      'type' => 'text/css',
+    ),
+  );
+  $page['#attached']['html_head'][] = [$element, 'pt_font'];
+  $element = array(
+    '#tag' => 'link', // The #tag is the html tag - <link />
+    '#attributes' => array( // Set up an array of attributes inside the tag
+      'href' => '//fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap',
+      'rel' => 'stylesheet',
+      'type' => 'text/css',
+    ),
+  );
+  $page['#attached']['html_head'][] = [$element, 'roboto_font'];
+}
+
+
+/**
+ * Process layout.
+ */
+function cu_pres_barrio_preprocess_ds_1col(&$variables) {
+  if (!empty($variables['content']['#node'])) {
+    $view_mode = $variables['content']['#view_mode'];
+    if ($view_mode == 'teaser' || $view_mode == 'media_teaser' || $view_mode == 'featured') {
+      $node = $variables['content']['#node'];
+      if ($node->bundle() == 'news' || $node->bundle() == 'newsletter') {
+        if ($node->hasField('field_external_link') && !$node->field_external_link->isEmpty()) {
+          $url = $node->field_external_link->first()->getUrl();
+          $variables['attributes']['onclick'] = "window.open('" . $url->toString() . "', '_blank')";
+        }
+        else {
+          $url = Url::fromUri('internal:/' . $node->toUrl()->getInternalPath());
+          $variables['attributes']['onclick'] = 'location.href=\'' . $url->toString() . '\'';
+        }
+      }
+    }
+  }
+  if (!empty($variables['content']['#taxonomy_term'])) {
+    $view_mode = $variables['content']['#view_mode'];
+    if ($view_mode == 'teaser') {
+      $term = $variables['content']['#taxonomy_term'];
+      if ($term->hasField('field_pillar_overlay_position') && !$term->field_pillar_overlay_position->isEmpty()) {
+        $variables['content']['group_overlay']['#attributes']['class'][] = 'position-' . $term->field_pillar_overlay_position->first()->getValue()['value'];
+      }
+    }
+  }
+}
+
+/**
+ * Preprocess node
+ */
+function cu_pres_barrio_preprocess_taxonomy_term__gallery(&$variables) {
+  $term = $variables['elements']['#taxonomy_term'];
+  if ($term->hasField('field_term_banner_image') && !$term->field_term_banner_image->isEmpty()) {
+    $media = $term->field_term_banner_image->entity;
+    if (!$media->field_media_image->isEmpty()) {
+      $image = $media->field_media_image->entity;
+      $background_image_url = file_create_url($image->getFileUri());
+      $variables['attributes']['style'][] = "background-image: url($background_image_url);";
+    }
+  }
+}

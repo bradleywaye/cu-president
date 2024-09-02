@@ -1,0 +1,80 @@
+/* VARIABLES */
+
+// Set the directory for the theme root used to locate images, fonts etc.
+$theme-root: '..';
+
+// Set other directories relative to theme root.
+$image-path: '#{$theme-root}/images';
+$icon-font-path: '#{$theme-root}/bootstrap/assets/fonts/bootstrap/';
+
+// Typography
+$baseFont: 'Roboto', Arial, sans-serif;
+$fontAwesome: 'Font Awesome 5 Free';
+$fontAwesomeBrands: 'Font Awesome 5 Brands';
+$fontLite: 300;
+$fontNormal: 400;
+$fontMedium: 500;
+$fontHeavy: 500;
+$fontSemibold: 600;
+$fontBold: 700;
+$fontExtrabold: 900;
+
+// colors
+$baseColor: #505050;
+$primary-shade: #A8CF45;
+$primary-light: lighten($primary-shade, 37%);
+$primary-dark: darken($primary-shade, 12%);
+$accent-shade: #0079C0;
+$accent-light: lighten($accent-shade, 37%);
+$accent-dark: darken($accent-shade, 12%);
+// Reassign color vars to semantic color scheme
+$white: #fff !default;
+$gold: #cfb97d;
+$grey: #666;
+$lightgrey: #bbb;
+$flyoutblue: #5ca7d7;
+$footertext: #aaa;
+$red: #dc3545;
+$yellow: #ffc107;
+$green: #28a745;
+$cyan: #17a2b8;
+$gray-100: #f8f9fa !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$theme-colors: ( primary: $accent-shade, secondary: $primary-shade, success: $green, info: $cyan, warning: $yellow, danger: $red, light: $gray-100, dark: $gray-800);
+$brand-primary: $accent-shade;
+$gray-base: #000;
+$gray-lighter: lighten($gray-base, 93.5%) !default;
+//$brand-success: $green;
+//$brand-info: $teal;
+//$brand-warning: $orange;
+//$brand-danger: $red;
+$brand-inverse: $primary-shade;
+// Body
+//
+// Settings for the `<body>` element.
+$body-bg: $white;
+$body-color: $gray-900;
+$inverse-bg: $primary-shade;
+$inverse-color: $gray-lighter;
+// Links
+//
+// Style anchor elements.
+$link-color: $accent-shade;
+$link-decoration: none;
+$link-hover-color: $accent-dark;
+$link-hover-decoration: underline;
+// Comments
+$comment-spacer-x: 1.25em;
+$comment-spacer-y: 1.25em;
+// Responsive font sizes
+$enable-responsive-font-sizes: true;
+$enable-shadows: false;
+$enable-gradients: false;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 750px,
+  lg: 970px,
+  xl: 1170px
+) !default;

@@ -1,0 +1,7 @@
+cup_tweaks.home:
+  path: '/home'
+  defaults:
+    _controller: '\Drupal\cup_tweaks\Controller\HomePage::content'
+    _title: ''
+  requirements:
+    _permission: 'access content'

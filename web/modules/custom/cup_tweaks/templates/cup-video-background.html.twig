@@ -1,0 +1,30 @@
+{%
+  set classes = [
+	'videobg',
+    'video-playing'
+  ]
+%}
+<section{{ attributes.addClass(classes) }}>
+  {% if video_url %}
+    <div class="ambient">
+      <label style="display:none" for="herovideo">Introduction Video</label>
+      <video id="bg-video-{{ id }}" autoplay="true" loop="true" autobuffer="true" muted="true" playsinline="true">
+        <source src="{{ video_url }}" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-overlay"></div>
+  {% endif %}
+  {% if bg_img_url_wide and bg_img_url_narrow %}
+    <picture>
+      <!--[if IE 9]><video style="display: none;"><![endif]-->
+      <source srcset="{{ bg_img_url_narrow }} 1x" media="(max-width: 767px)">
+      <source srcset="{{ bg_img_url_wide }} 1x" media="(min-width: 768px)">
+      <!--[if IE 9]></video><![endif]-->
+      <img src="{{ bg_img_url_wide }}">
+    </picture>
+  {% endif %}
+  {% if video_url %}
+    <div id="video-play-{{ id }}" title="Play the video" class="bg-video-player-control bg-video-play" aria-hidden="true">Play Video</div>
+    <div id="video-pause-{{ id }}" title="Pause the video" class="bg-video-player-control bg-video-pause" aria-hidden="true">Pause Video</div>
+  {% endif %}  
+</section>

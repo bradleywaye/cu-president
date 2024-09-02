@@ -1,0 +1,21 @@
+global-styling:
+  version: VERSION
+  js:
+    js/popper.min.js: {}
+    js/Sortable.js: {}
+    js/postscribe.min.js: {}
+    js/bootstrap.min.js: {}
+    js/global.js: {}
+    /libraries/jquery.inview/jquery.inview.min.js: {}
+    /libraries/jquery.matchheight/dist/jquery.matchHeight-min.js: {}
+    /libraries/svgeezy/svgeezy.min.js: {}
+    js/cu_pres_barrio.js: {}
+  css:
+    component:
+      css/style.css: {}
+      font-awesome/css/all.min.css: {}
+  dependencies:
+    - core/jquery
+    - core/once
+    - core/drupal
+    - core/jquery.cookie

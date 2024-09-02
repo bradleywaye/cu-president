@@ -1,0 +1,49 @@
+name: 'CU President Barrio'
+type: theme
+description: 'A Barrio sub-theme for CU President.'
+# version: VERSION
+core: 8.x
+core_version_requirement: ^8 || ^9 || ^10
+base theme: bootstrap_barrio
+
+libraries:
+  - cu_pres_barrio/global-styling
+libraries-override:
+  bootstrap_barrio/global-styling: false
+  bootstrap_barrio/file: false
+  core/jquery.ui:
+    css:
+      theme:
+        assets/vendor/jquery.ui/themes/base/theme.css: false
+  core/jquery.ui.dialog:
+    css:
+      component:
+        assets/vendor/jquery.ui/themes/base/dialog.css: false
+regions:
+  navigation: 'Navigation'
+  navigation_collapsible: 'Navigation (Collapsible)'
+  branding: 'Branding'
+  header: 'Header'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  hero: 'Hero'
+  content: 'Content'
+  content_second: 'Content Second'
+  post_content_1: 'Post Content 1'
+  post_content_2: 'Post Content 2'
+  post_content_3: 'Post Content 3'
+  post_content_4: 'Post Content 4'
+  post_content_5: 'Post Content 5'
+  post_content_6: 'Post Content 6'
+  post_content_7: 'Post Content 7'
+  sidebar_first: 'First Sidebar'
+  sidebar_second: 'Second Sidebar'
+  department: 'Department'
+  footer_1: 'Footer 1'
+  footer_2: 'Footer 2'
+  footer_3: 'Footer 3'
+  footer_post_1: 'Footer Post 1'
+  footer_post_2: 'Footer Post 2'
+  footer_address: 'Footer Address'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'

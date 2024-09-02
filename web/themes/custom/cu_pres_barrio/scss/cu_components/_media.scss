@@ -1,0 +1,150 @@
+img {
+  max-width: 100%;
+}
+
+.image {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background-color: #000;
+  img {
+    -webkit-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+    width: 100%;
+    height: auto;
+  }
+}
+
+figure {
+  margin: 0;
+}
+
+.caption {
+  > figcaption {
+    color: #000;
+    margin-top: 5px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  > figcredit {
+    color: #999;
+    margin-top: 2px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+.media--type-image {
+  flex-direction: column;
+  &.media-view-mode-inline-original {
+    margin: 0 0 1.6rem 0;
+  }
+  &.media-view-mode-inline-xsmall {
+    margin: 0 20px 1.6rem 20px;
+    max-width: 25vw;
+  }
+  &.media-view-mode-inline-small {
+    margin: 0 20px 1.6rem 20px;
+    max-width: 50vw;
+  }
+  &.media-view-mode-inline-medium {
+    max-width: 100vw;
+    float: none;
+    margin: 0 20px 1.6rem 20px;
+  }
+
+  @include media-breakpoint-up(md) {
+    &.media-view-mode-inline-medium,
+    &.media-view-mode-inline-small,
+    &.media-view-mode-inline-xsmall,
+    &.media-view-mode-inline-original {
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+    &.media-view-mode-inline-medium {
+      max-width: 33vw;
+    }
+    &.media-view-mode-inline-small {
+      max-width: 20vw;
+    }
+    &.media-view-mode-inline-xsmall {
+      max-width: 15vw;
+    }
+    &.align-left {
+      float: left;
+    }
+    &.align-right {
+      float: right;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    &.media-view-mode-inline-medium {
+      max-width: 25vw;
+    }
+    &.media-view-mode-inline-small {
+      max-width: 13.3vw;
+    }
+    &.media-view-mode-inline-xsmall {
+      max-width: 7.5vw;
+    }
+  }
+
+  &.align-left {
+    margin-left: 0;
+  }
+
+  &.align-right {
+    margin-right: 0;
+  }
+
+  &.align-center {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3.6rem;
+  }
+}
+
+.media--type-remote-video {
+  &.media-view-mode-full-width-video {
+    width: 100%;
+    .field--name-field-media-oembed-video {
+      padding-top: 56.25%;
+      position: relative;
+      width: 100%;
+      iframe {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .col-md-8 {
+    figure {
+      &.align-left {
+        margin-left: -25%;
+      }
+      &.align-right {
+        margin-right: -25%;
+      }
+    }
+  }
+}
+
+.inline_container {
+  margin-bottom: 2.5rem;
+}
+
+.field--name-field-pillar-banner-image img {
+  width: 100%;
+  height: auto;
+}

@@ -1,0 +1,156 @@
+.region-department {
+  background-color: #e2e2e2;
+  border-top: 1px solid #d2d2d2;
+  padding: 10px 40px;
+  .block {
+    .dept-title {
+      float: left;
+      font-size: 30px;
+      line-height: 60px;
+      font-weight: $fontLite;
+      color: $black;
+      text-shadow: 1px 1px $white;
+    }
+    .cu-links {
+      float: right;
+      font-size: 9px;
+      line-height: 20px;
+      font-weight: $fontBold;
+      text-transform: uppercase;
+      text-shadow: none;
+      a {
+        color: $grey;
+        &:hover,
+        &:focus {
+          text-decoration: none;
+        }
+      }
+      .home-link,
+      .dept-link {
+        float: right;
+        margin-left: 25px;
+        padding-top: 10px;
+        .fas {
+          transition: background-color 0.4s ease-in-out;
+          font-size: 15px;
+          font-weight: $fontBold;
+          font-style: initial;
+          display: block;
+          width: 40px;
+          height: 40px;
+          margin: 0 auto;
+          color: $white;
+          padding: 12px;
+          text-align: center;
+          background-color: #aaaaaa;
+          border-radius: 50%;
+          &:hover {
+            background-color: $black;
+          }
+        }
+      }
+    }
+  }
+}
+
+.region-branding {
+  padding-left: 20px;
+  padding-right: 20px;
+  .site-logo {
+    width: 80%;
+    float: left;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .department-logo {
+    width: 100%;
+    max-width: 270px;
+  }
+  @include media-breakpoint-up(sm) {
+    .department-logo {
+      max-width: 290px;
+    }
+    .site-logo {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+  }
+  @include media-breakpoint-up(md) {
+    padding-left: 30px;
+    padding-right: 30px;    
+    .department-logo {
+      max-width: 300px;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    padding-left: 40px;
+    padding-right: 40px;
+    .department-logo {
+      max-width: 330px;
+    }
+  }  
+}
+
+.section-header {
+  .region-hero {
+    position: relative;
+    height: 100px;
+    background-image: url(#{$image-path}/banner-in-the-media-saliman-01.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > .block-block-content {
+      @extend .container;
+      .page-header {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        color: #fff;
+      }
+    }
+    &:after {
+      content: "\A";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    @include media-breakpoint-up(sm) {
+      height: 140px;
+    }
+    @include media-breakpoint-up(md) {
+      height: 180px;
+    }
+    @include media-breakpoint-up(lg) {
+      height: 240px;
+    }
+    @include media-breakpoint-up(xl) {
+      height: 280px;
+    }
+  }
+}
+
+.section-header.header-past-presidents {
+  .region-hero {
+    background-image: url(#{$image-path}/banner-cuboulder-historical-past-pres.jpg);
+  }
+}
+
+.section-header.header-leadership {
+  .region-hero {
+    background-image: url(#{$image-path}/banner-university-leadership.jpg);
+  }
+}
+
+.section-header.header-varsity {
+  .region-hero {
+    background-image: url(#{$image-path}/banner-varsity-pond.jpg);
+  }
+}

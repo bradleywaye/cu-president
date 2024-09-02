@@ -1,0 +1,37 @@
+.paragraph--type--embed {
+  &:not(.provider-instagram) {
+    .iframe-wrapper {
+      position: relative;
+      padding-top: 56.25%;
+      iframe {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        min-width: 0 !important;
+        padding-bottom: 1px !important;
+      }
+    }
+  }
+  &.provider-instagram {
+    .iframe-wrapper {
+      padding-top: 0 !important;
+      iframe {
+        position: relative;
+        max-width: 100%;
+        margin: 0 !important;
+        min-width: 0 !important;
+      }
+    }
+  }
+  &.provider-twitter {
+    .iframe-wrapper {
+      padding-top: 0 !important;
+      .twitter-tweet {
+        margin: 0 !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,131 @@
+.node--type-team-member,
+.node--type-past-presidents {
+  &.node--view-mode-full {
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.2;
+    }
+    .field--name-field-job-title,
+    .field--name-field-presidents-dates {
+      font-weight: 500;
+      color: #999;
+      font-size: 18px;
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+    @include media-breakpoint-up(sm) {
+      h1 {
+        font-size: 26px;
+      }
+      .field--name-field-job-title,
+      .field--name-field-presidents-dates {
+        font-size: 22px;
+      }
+    }
+    @include media-breakpoint-up(md) {
+      h1 {
+        font-size: 32px;
+      }
+      .field--name-field-job-title,
+      .field--name-field-presidents-dates {
+        font-size: 24px;
+      }
+    }
+    @include media-breakpoint-up(lg) {
+      h1 {
+        font-size: 38px;
+      }
+      .field--name-field-job-title,
+      .field--name-field-presidents-dates {
+        font-size: 28px;
+      }
+    }
+    @include media-breakpoint-up(xl) {
+      h1 {
+        font-size: 42px;
+      }
+      .field--name-field-job-title,
+      .field--name-field-presidents-dates {
+        font-size: 32px;
+      }
+    }
+  }
+  &.node--view-mode-sidebar {
+    img {
+      max-width: 100%;
+    }
+    .field--name-field-contact-information {
+      font-weight: 400;
+      color: #000;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .field--name-field-member-image,
+    .field--name-field-presidents-image {
+      margin-bottom: 2rem;
+    }
+    .field--name-node-title {
+      font-size: 1.4rem;
+      line-height: 1.4;
+      font-weight: 600;
+      color: #000;
+    }
+    .field--name-field-job-title,
+    .field--name-field-presidents-dates {
+      font-size: 1.3rem;
+      line-height: 1.4;
+      font-weight: 400;
+      color: #777;
+    }
+    .group-image {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 2rem;
+    }
+    @include media-breakpoint-up(sm) {
+      .field--name-field-contact-information {
+        color: #555;
+        font-size: 12px;
+      }
+    }
+    @include media-breakpoint-up(sm) {
+      .field--name-field-contact-information {
+        font-size: 13px;
+      }
+    }
+    @include media-breakpoint-up(md) {
+      .field--name-field-contact-information {
+        font-size: 14px;
+      }
+    }
+  }
+  &.node--view-mode-teaser {
+    cursor: pointer;
+    .field--name-field-member-image,
+    .field--name-field-presidents-image{
+      position: relative;
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      background-color: #000;
+      img {
+        -webkit-transition: all 0.7s ease; 
+        transition: all 0.7s ease;
+        width: 100%;
+        height: auto;
+      }
+    }
+    &:hover {
+      .field--name-field-member-image,
+      .field--name-field-presidents-image {
+        img {
+          -webkit-transform: scale(1.1); 
+          transform: scale(1.1);
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}

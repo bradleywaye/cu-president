@@ -1,0 +1,14 @@
+.animated {
+  opacity: 0;
+  transition: unset;
+  -ms-transform: translateY(30px);
+  transform: translateY(30px);
+  visibility: visible;
+}
+
+.fadeInUp {
+  transition: opacity 2s cubic-bezier(0.215, 0.61, 0.355, 1), transform 2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: opacity 2s cubic-bezier(0.215, 0.61, 0.355, 1), -webkit-transform 2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transform: translateY(0);
+  opacity: 1;
+}

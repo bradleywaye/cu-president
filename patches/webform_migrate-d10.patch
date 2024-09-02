@@ -1,0 +1,27 @@
+diff --git a/src/Plugin/migrate/source/d7/D7Webform.php b/src/Plugin/migrate/source/d7/D7Webform.php
+index 4dd9fd5..ee4c15b 100644
+--- a/src/Plugin/migrate/source/d7/D7Webform.php
++++ b/src/Plugin/migrate/source/d7/D7Webform.php
+@@ -478,7 +478,7 @@ class D7Webform extends DrupalSqlBase implements ImportAwareInterface, RollbackA
+             $size = $extra['filtering']['size'];
+
+             // Convert the string into an integer in bytes.
+-            $file_size_bytes = Bytes::toInt($size);
++            $file_size_bytes = Bytes::toNumber($size);
+
+             // Convert that to MB.
+             $file_size = floor($file_size_bytes / 1024 / 1024);
+diff --git a/webform_migrate.info.yml b/webform_migrate.info.yml
+index 5c445c5..3bbb21e 100644
+--- a/webform_migrate.info.yml
++++ b/webform_migrate.info.yml
+@@ -1,7 +1,7 @@
+ name: 'Webform Migrate'
+ type: module
+ description: 'Migration routines from d6, d7 webform to d8 webform'
+-core_version_requirement: ^8.8 || ^9
++core_version_requirement: ^9.5 || ^10
+ package: 'Migration'
+ dependencies:
+   - webform:webform
+

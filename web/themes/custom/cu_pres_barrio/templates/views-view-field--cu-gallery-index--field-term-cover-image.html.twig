@@ -1,0 +1,8 @@
+<div class="gallery-cover" onclick="location.href='/taxonomy/term/{{ row.tid }}'">
+  {{ output }}
+  <div class="overlay">
+    <div class="gallery-name">{{ row.taxonomy_term_field_data_name }}</div>
+    <div class="gallery-count">{{ row.node_field_data_taxonomy_index_nid }} Photo{% if row.node_field_data_taxonomy_index_nid != 1%}{{ 's' }}{% endif %}</div>
+  </div>
+</div>
+

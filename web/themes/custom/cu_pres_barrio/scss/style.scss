@@ -1,0 +1,253 @@
+/* 
+Theme Name: Bootstrap 4 Sass
+Description: Bootstrap 4 with Sass
+*/
+
+// import files
+@import "import";
+
+/* GENERAL STYLES
+-------------------------------------------------*/
+
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background: $white;
+  font-family: $baseFont;
+  font-weight: $fontNormal;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $baseColor;  
+  -webkit-font-smoothing: antialiased; 
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* COLORS 
+--------------------------------------------------*/
+
+a {
+    color: $accent-shade;
+}
+
+.bg-inverse {
+    background: $primary-shade !important;
+}
+
+.site-footer {
+    background: $accent-shade !important;
+}
+
+.menu--main li a {
+    color: $primary-shade;
+}
+
+.menu--account li a {
+    color: $primary-shade;
+}
+
+.site-name-slogan a {
+    text-decoration: none;
+}
+
+.card-group img {
+    margin: 0;
+    width: 100%;
+    height: auto;
+}
+
+.card-group .field--type-image {
+    margin: 0
+}
+
+.slick {
+    width: 100%;
+}
+
+.slick>div {
+    margin: 0 15px;
+}
+
+p {
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 6rem;
+  font-weight: 600;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #222;
+}
+
+h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #000;
+  margin-top: 4.5rem;
+  margin-bottom: 1.75rem;
+}
+h4 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #000;
+  margin-top: 4.5rem;
+  margin-bottom: 1.75rem;
+}
+h5 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #000;
+  margin-top: 4.5rem;
+  margin-bottom: 1.25rem;
+}
+h6 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #000;
+  margin-top: 4.5rem;
+  margin-bottom: 1.25rem;
+}
+
+@include media-breakpoint-up(sm) {
+  h3 {
+    font-size: 1.9rem;
+  }
+  h4 {
+    font-size: 1.7rem;
+  }
+  h5 {
+    font-size: 1.5rem;
+  }
+  h6 {
+    font-size: 1.3rem;
+  }
+}
+@include media-breakpoint-up(md) {
+  h3 {
+    font-size: 2rem;
+  }
+  h4 {
+    font-size: 1.8rem;
+  }
+  h5 {
+    font-size: 1.6rem;
+  }
+  h6 {
+    font-size: 1.4rem;
+  }
+}
+@include media-breakpoint-up(lg) {
+  h3 {
+    font-size: 2.2rem;
+  }
+  h4 {
+    font-size: 1.9rem;
+  }
+  h5 {
+    font-size: 1.7rem;
+  }
+  h6 {
+    font-size: 1.5rem;
+  }
+}
+@include media-breakpoint-up(xl) {
+  h3 {
+    font-size: 2.4rem;
+  }
+  h4 {
+    font-size: 2rem;
+  }
+  h5 {
+    font-size: 1.8rem;
+  }
+  h6 {
+    font-size: 1.6rem;
+  }
+}
+
+ol, ul {
+  padding-left: 1.5em;
+  .popover &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Page header.
+.page-header {
+  font-size: 2rem;
+  margin-top: 0;
+  padding: 0;
+  border: none;
+  @include media-breakpoint-up(sm) {
+    font-size: 2.5rem;
+  }
+  @include media-breakpoint-up(md) {
+    font-size: 3rem;
+  }
+  @include media-breakpoint-up(lg) {
+    font-size: 4rem;
+  }
+  @include media-breakpoint-up(xl) {
+    font-size: 5rem;
+  }
+}
+
+// Paragraphs.
+p:last-child,
+.form-group:last-child,
+.panel:last-child {
+  margin-bottom: 0;
+}
+
+// Help region.
+.region-help {
+  > .glyphicon {
+    font-size: 18px;
+    float: left;
+    margin: -0.05em 0.5em 0 0;
+  }
+  .block {
+    overflow: hidden;
+  }
+}
+
+.help-block, .control-group .help-inline {
+  color: #777777;
+  font-size: 12px;
+  margin: 5px 0 10px;
+  padding: 0;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.field--type-entity-reference {
+  margin: 0;
+}
+
+b, strong {
+  font-weight: 600;
+}

@@ -1,0 +1,88 @@
+.view-cu-news {
+  .views-exposed-form {
+    padding: 0 0 7rem 0;
+    .form-item {
+      width: 30%;
+      margin-right: 5%;
+      .select-wrapper {
+        width: 100%;
+        select {
+          padding: 1rem 2rem;
+          width: 100%;
+          height: auto;
+          font-size: 16px;
+          line-height: 26px;
+        }
+      }
+    }
+    .button {
+      padding: 1rem 4rem;
+      line-height: 26px;
+      font-size: 16px;
+      .glyphicon {
+        display: none;
+      }
+    }
+    .form-group {
+      margin-bottom: 0;
+    }
+  }
+  .views-row {
+    margin-bottom: 30px;
+  }
+}
+
+.view-footer {
+  .view-button-wrapper {
+    margin-top: 3rem;
+    text-align: right;
+    .view-button {
+      display: inline-block;
+      text-transform: uppercase;
+      color: $black;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+      .view-entity {
+        color: #000;
+      }
+      &:hover {
+        text-decoration: none;
+      }
+      &:after {
+        font-family: $fontAwesome;
+        font-weight: 700;
+        content: '\f0da';
+        margin-left: 10px;
+        color: #000;
+      }
+    }
+  }
+}
+
+.view-cu-newsletters {
+  .views-row {
+    margin-bottom: 30px;
+  }
+}
+
+.wrapper-grey {
+  .main-wrapper {
+    background-color: #f6f6f6;
+  }
+}
+
+.view-display-id-term_news {
+  .views-exposed-form {
+    .form-row {
+      justify-content: center;
+    }
+    .nav-item {
+      margin-right: 1rem;
+    }
+    .nav-link {
+      color: $black;
+      border: 1px solid #ccc;
+    }
+  }
+}

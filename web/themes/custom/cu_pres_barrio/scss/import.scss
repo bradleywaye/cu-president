@@ -1,0 +1,36 @@
+/* IMPORTS */
+
+//@import url(font-awesome.min.css);
+// variables
+@import "variables";
+// typography
+@import "typography";
+//bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
+//material design bootstrap
+//@import "../node_modules/mdbootstrap/scss/mdb";
+// barrio
+@import "barrio";
+
+// mixins
+@import "mixins";
+
+// CU President
+@import "cu_components/fade";
+@import "cu_components/footer";
+@import "cu_components/front";
+@import "cu_components/header";
+@import "cu_components/layout";
+@import "cu_components/media";
+@import "cu_components/navbar";
+@import "cu_components/news";
+@import "cu_components/term";
+@import "cu_components/video";
+@import "cu_components/team_member";
+
+@import "views/news";
+@import "views/team";
+@import "views/presidents";
+@import "views/gallery";
+@import "views/ideas_topics";
+@import "views/terms";

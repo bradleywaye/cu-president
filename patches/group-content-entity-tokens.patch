@@ -1,0 +1,157 @@
+diff --git a/group.tokens.inc b/group.tokens.inc
+index d60235b..dfea935 100644
+--- a/group.tokens.inc
++++ b/group.tokens.inc
+@@ -53,6 +53,11 @@ function group_token_info() {
+     'description' => t('The URL of the group.'),
+   ];
+
++  $tokens['group']['alias'] = [
++    'name' => t('Alias'),
++    'description' => t('The alias used by the parent group'),
++  ];
++
+   $tokens['group']['edit-url'] = [
+     'name' => t('Edit URL'),
+     'description' => t("The URL of the group's edit page."),
+@@ -121,6 +126,39 @@ function group_token_info() {
+     'description' => t('A prettier way of labeling group content of the same plugin type.'),
+   ];
+
++  $tokens['group_content']['label'] = [
++    'name' => t('Group content entity label'),
++    'description' => t('The label of the entity object referenced in the group content.'),
++  ];
++
++  // Build per entity type chained tokens.
++  $plugin_manager = \Drupal::service('plugin.manager.group_content_enabler');
++  if ($plugin_manager) {
++    $content_entity_types = [];
++    foreach ($plugin_manager->getAll() as $plugin_id => $plugin) {
++      $entity_type_id = $plugin->getEntityTypeId();
++      if (!isset($content_entity_types[$entity_type_id])) {
++        $entity_type_object = \Drupal::entityTypeManager()->getDefinition($entity_type_id);
++        if ($entity_type_object) {
++          $content_entity_types[$entity_type_id] = $entity_type_object->getLabel();
++        }
++      }
++    }
++
++    foreach ($content_entity_types as $content_entity_type_id => $content_entity_type_label) {
++      $tokens['group_content'][$content_entity_type_id] = [
++        'type' => $content_entity_type_id,
++        'name' => t('Group content entity: @label', [
++          '@label' => $content_entity_type_label,
++        ]),
++        'description' => t('The @label (@type) entity object for the group content.', [
++          '@label' => $content_entity_type_label,
++          '@type' => $content_entity_type_id,
++        ]),
++      ];
++    }
++  }
++
+   return ['types' => $types, 'tokens' => $tokens];
+ }
+
+@@ -174,6 +212,11 @@ function group_tokens($type, $tokens, array $data, array $options, BubbleableMet
+           $replacements[$original] = $group->toUrl('canonical', $url_options)->toString();
+           break;
+
++        case 'alias':
++          $group_alias = \Drupal::service('path_alias.manager')->getAliasByPath('/group/' . $group->id());
++          $replacements[$original] = $group_alias;
++          break;
++
+         case 'edit-url':
+           $replacements[$original] = $group->toUrl('edit-form', $url_options)->toString();
+           break;
+@@ -256,6 +301,19 @@ function group_tokens($type, $tokens, array $data, array $options, BubbleableMet
+           $bubbleable_metadata->addCacheableDependency($date_format);
+           $replacements[$original] = \Drupal::service('date.formatter')->format($group_content->getChangedTime(), 'medium', '', NULL, $langcode);
+           break;
++
++        case 'label':
++          $replacements[$original] = $group_content->label();
++          break;
++
++        case $content_entity_type:
++          // Entity chained references.
++          // Add cache dependency.
++          $bubbleable_metadata->addCacheableDependency($content_entity);
++
++          // Provide a string for tokens that are not chained.
++          $replacements[$original] = $content_entity->label();
++          break;
+       }
+
+       // Actual chaining of tokens handled below.
+@@ -270,6 +328,17 @@ function group_tokens($type, $tokens, array $data, array $options, BubbleableMet
+       if ($changed_tokens = $token_service->findWithPrefix($tokens, 'changed')) {
+         $replacements += $token_service->generate('date', $changed_tokens, ['date' => $group_content->getChangedTime()], $options, $bubbleable_metadata);
+       }
++
++      // Content entity chaining of tokens.
++      // Example: "group_content:node:field_cool_value".
++      if ($content_entity && $content_entity_type) {
++        if ($content_entity_tokens = $token_service->findWithPrefix($tokens, $content_entity_type)) {
++          $bubbleable_metadata->addCacheableDependency($content_entity);
++          $replacements += $token_service->generate($content_entity_type, $content_entity_tokens, [
++            $content_entity_type => $content_entity,
++          ], $options, $bubbleable_metadata);
++        }
++      }
+     }
+   }
+
+diff --git a/modules/gnode/gnode.module b/modules/gnode/gnode.module
+index 5b1e29d..efe916f 100644
+--- a/modules/gnode/gnode.module
++++ b/modules/gnode/gnode.module
+@@ -42,3 +42,46 @@ function gnode_entity_operation(EntityInterface $entity) {
+
+   return $operations;
+ }
++
++/**
++ * Implements hook_path_update().
++ *
++ * Track path alias changes to published node translations that are related
++ * to a group.
++ */
++function gnode_path_update($path) {
++  if (empty($path['source']) || !\Drupal::moduleHandler()->moduleExists('pathauto')) {
++    return;
++  }
++
++  // Extract nid from the source path.
++  if (preg_match('@^\/node\/(\d+)$@', $path['source'], $node_matches)) {
++    // Load the node.
++    $nid = $node_matches[1];
++    $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
++    if ($node) {
++      $pathauto = \Drupal::service('pathauto.generator');
++      $entity_mgr = \Drupal::service('entity.repository');
++      $langcode = !empty($path['langcode']) ? $path['langcode'] : \Drupal::service('language.default')->get()->getId();
++      // Get the node translation.
++      $node_translation = $entity_mgr->getTranslationFromContext($node, $langcode);
++
++      // Only update published nodes.
++      if ($node_translation->isPublished()) {
++        // Find the group relations for this node.
++        $relation_storage = \Drupal::entityTypeManager()->getStorage('group_content');
++        // Clear group_content static cache to clear stale data for the node.
++        $relation_storage->resetCache();
++        // Load group_content for the node.
++        $relations = $relation_storage->loadByEntity($node_translation);
++        if ($relations) {
++          // Update the alias for each relation in the same language.
++          foreach ($relations as $relation) {
++            $relation_update = $entity_mgr->getTranslationFromContext($relation, $langcode);
++            $pathauto->updateEntityAlias($relation_update, 'update');
++          }
++        }
++      }
++    }
++  }
++}

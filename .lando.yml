@@ -1,0 +1,18 @@
+name: cu-president
+recipe: pantheon
+config:
+  framework: drupal8
+  site: cu-president
+  id: 11a7b30d-198a-494e-9e6d-d6622a328330
+
+# Services
+services:
+  database:
+    portforward: 52316
+  cu-president-phpmyadmin:
+    type: phpmyadmin
+
+# Proxy
+proxy:
+  phpmyadmin:
+    - cu-president-phpmyadmin.lndo.site

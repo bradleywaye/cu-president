@@ -1,0 +1,153 @@
+.term-type {
+  text-transform: uppercase;
+  &:before {
+    font-family: $fontAwesome;
+    font-weight: 700;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  &.term-type-ideas_topics:before {
+    content: '\f19c';
+  }
+}
+
+.page-vocabulary-ideas-topics {
+  .region-content {
+    padding: 0;
+  }
+  .taxonomy-term--type-ideas-topics.taxonomy-term--view-mode-full {
+    @extend .row;
+    @extend .no-gutters !optional;
+  }
+  .block-system-main-block {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  #pillar-hero-left {
+    padding: 3rem 5rem 5rem 5rem;
+    //background: radial-gradient(circle at 98.5697% 63.464%,#ffffff,#e7e7e7);
+  }
+  .page-title {
+    position: relative;
+    margin-bottom: 7rem;
+    font-size: 3rem;
+    line-height: 1.2;
+    font-weight: 600;
+    color: #000;
+    &:after {
+      display: block;
+      content: '\A';
+      border-top: 3px solid $gold;
+      width: 60px;
+      position: absolute;
+      left: 0;
+      bottom: -30px;
+    }
+  }
+  .field--name-description {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 500;
+    color: #8c8c8c;
+  }
+  .field--name-dynamic-token-fieldtaxonomy-term-tax-term {
+    display: none;
+  }
+  .field--name-field-pillar-media {
+    clear: both;
+    @include box-shadow(40px 40px 0 $gold);
+  }
+  .field--name-field-pillar-banner-image {
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 280px;
+  }
+  .region-content {
+    padding-top: 0;
+  }
+  .region-post-content-1-wrapper {
+    background-color: #e7e7e7;
+  }
+  .region-post-content-3-wrapper {
+    background-color: #f6f6f6;
+  }
+  @include media-breakpoint-up(sm) {
+    .page-title {
+      font-size: 3.5rem;
+    }
+    .field--name-description {
+      font-size: 1.6rem;
+    }
+    #pillar-hero-left {
+      padding: 5rem 7rem 10rem 7rem;
+    }
+    .field--name-field-pillar-banner-image {
+      min-heiht: 300px;
+    }
+  }
+  @include media-breakpoint-up(md) {
+    .page-title {
+      font-size: 4rem;
+    }
+    .field--name-description {
+      font-size: 1.7rem;
+    }
+    #pillar-hero-left {
+      padding: 8rem 10rem 14rem 10rem;
+    }
+    .field--name-field-pillar-banner-image {
+      min-heiht: 350px;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    .page-title {
+      font-size: 4.5rem;
+    }
+    .field--name-description {
+      font-size: 1.9rem;
+    }
+    #pillar-hero-left {
+      padding: 10rem 13rem 16rem 13rem;
+    }
+  }
+  @include media-breakpoint-up(xl) {
+    .page-title {
+      font-size: 5rem;
+    }
+    .field--name-description {
+      font-size: 2rem;
+    }
+    #pillar-hero-left {
+      padding: 14rem 16rem 20rem 16rem;
+    }
+  }
+}
+
+.taxonomy-term--view-mode-teaser {
+  cursor: pointer;
+  position: relative;
+  .field--name-taxonomy-term-title {
+    h2 {
+      font-size: 1.8rem;
+      line-height: 1.3;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: $black;
+    }
+    &::before {
+      display: block;
+      content: '\A';
+      border-top: 6px solid $gold;
+      width: 20px;
+    }
+  }
+  .field--name-description,
+  .field--name-field-pillar-summary {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #666;
+  }
+}

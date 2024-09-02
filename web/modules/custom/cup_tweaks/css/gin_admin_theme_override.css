@@ -1,0 +1,30 @@
+.media--type-image.media--view-mode-preview img {
+  max-width: none;
+}
+
+.media--type-image.media--view-mode-preview {
+  width: 200px;
+}
+
+.field-multiple-table thead {
+  background: var(--gin-bg-header);
+}
+
+.field-multiple-table thead:after {
+  display: none !important;
+}
+
+.lpb-dialog.ui-dialog .ui-dialog-titlebar-close {
+  top: 12px;
+}
+
+.lpb-dialog.ui-dialog .ui-widget-content.ui-dialog-content {
+  padding-top: var(--gin-spacing-l);
+  padding-bottom: var(--gin-spacing-l);
+  border-radius: 0 0 var(--gin-border-m) var(--gin-border-m);
+}
+
+.media-library-item__details .field--type-file,
+.media-library-item__details .field--type-image {
+  overflow-wrap: break-word;
+}

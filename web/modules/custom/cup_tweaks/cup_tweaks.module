@@ -1,0 +1,153 @@
+<?php
+
+/**
+ * @file
+ * Contains cup_tweaks.module..
+ */
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
+use Drupal\Core\Entity\EntityForm;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Url;
+use Drupal\Core\Template\Attribute;
+use Drupal\pathauto\Entity\PathautoPattern;
+
+/**
+ * Implements hook_help().
+ */
+function cup_tweaks_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+	// Main module help for the cup_tweaks module.
+	case 'help.page.cup_tweaks':
+	  $output = '';
+	  $output .= '<h3>' . t('About') . '</h3>';
+	  $output .= '<p>' . t('CU President Site tweaks and customizations') . '</p>';
+	  return $output;
+
+	default:
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param type $form
+ * @param FormStateInterface $form_state
+ * @param type $form_id
+ */
+function cup_tweaks_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (isset($form['#form_id'])) {
+	  if ($form['#form_id'] == 'views_exposed_form') {
+	    $view = $form_state->getStorage('view');
+      if (isset($form['media'])) {
+        $form['media']['#options']['All'] = t('Any Media Type');
+        $form['#info']['filter-field_news_media_target_id']['label'] = '';
+      }
+      if (isset($form['topic'])) {
+        $form['topic']['#options']['All'] = t('Any Topic');
+        $form['#info']['filter-field_news_ideas_topics_target_id']['label'] = '';
+      }
+      if ($view['view']->id() == 'cu_news') {
+        if ($view['display']['id'] == 'term_news') {
+          $form = array_merge_recursive($form, array('#attributes' => array('class' => array('views-auto-submit-full-form'))));
+          $form['actions']['submit']['#attributes']['class'][] = 'views-use-ajax';
+          $form['actions']['submit']['#attributes']['class'][] = 'views-auto-submit-click';
+          $form['actions']['submit']['#attributes']['class'][] = 'js-hide';
+          $options = $form['media']['#options'];
+          $form['media']['#type'] = 'hidden';
+          $options['All'] = t('All');
+          $items = [];
+          foreach ($options as $key => $option) {
+            $items[] = [
+              'title' => $option,
+              'url' => Url::fromUserInput('#', ['fragment' => '#', 'attributes' => ['data-term-id' => $key]]),
+              'attributes' => new Attribute(),
+            ];
+          }
+          $form['pills'] = [
+            '#theme' => 'menu',
+            '#items' => $items,
+            '#menu_name' => 'media',
+            '#attributes' => ['class' => ['nav', 'nav-pills']],
+          ];
+        }
+      }
+      else if ($view['view']->id() == 'cu_news_search') {
+        //$form['text']['#attributes']['autocomplete'] = 'off';
+      }
+    }
+  }
+  if (!empty($form['field_featured'])) {
+    $form['field_featured']['#group'] = 'options';
+  }
+  if ($form_state->getFormObject() instanceof EntityForm) {
+    $entity = $form_state->getFormObject()->getEntity();
+    if ($entity->getEntityTypeId() == 'node' || $entity->getEntityTypeId() == 'taxonomy_term') {
+      if ($entity->hasField('field_metatags') && !empty($form['field_metatags']['widget'][0])) {
+        foreach (Element::children($form['field_metatags']['widget'][0]) as $key) {
+          if (!empty($form['field_metatags']['widget'][0][$key]['#open'])) {
+            $form['field_metatags']['widget'][0][$key]['#open'] = FALSE;
+          }
+        }
+      }
+    }
+  }
+}
+
+function cup_tweaks_theme() {
+  return [
+    'cup_video_background' => [
+      'variables' => [
+        'id' => NULL,
+        'video_url' => NULL,
+        'bg_img_url_wide' => NULL,
+        'bg_img_url_narrow' => NULL,
+      ],
+    ],
+  ];
+}
+
+function cup_tweaks_pathauto_pattern_alter(PathautoPattern &$pattern, array $context) {
+  // When nodes are created or updated, alter pattern with criteria logic.
+  if ($context['module'] == 'node' && ($context['op'] == 'insert' || $context['op'] == 'update' || $context['op'] == 'bulkupdate')) {
+    /** @var \Drupal\node\Entity\Node $node */
+    $node = $context['data']['node'];
+    switch ($node->bundle()) {
+      case 'news':
+        $properties = [
+          [
+            'name' => 'Statement',
+            'pattern' => '/statements/[node:title]'
+          ],
+          [
+            'name' => 'Blog',
+            'pattern' => '/blog/[node:created:custom:mdy]/[node:title]'
+          ]
+        ];
+        foreach ($properties as $property) {
+          $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['name' => $property['name']]);
+          if (!empty($terms)) {
+            $term = reset($terms);
+            if ($node->hasField('field_news_type') && !$node->field_news_type->isEmpty()) {
+              $type_tid = $node->field_news_type->first()->getValue()['target_id'];
+              if ($type_tid == $term->id()) {
+                $pattern->setPattern($property['pattern']);
+              }
+            }
+          }
+        }
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function cup_tweaks_page_attachments(&$attachments) {
+  $theme = \Drupal::service('theme.manager')->getActiveTheme()->getName();
+  if ($theme === 'gin') {
+    $attachments['#attached']['library'][] = 'cup_tweaks/gin_admin_theme_override';
+  }
+}

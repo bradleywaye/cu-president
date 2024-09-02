@@ -1,0 +1,173 @@
+.path-frontpage {
+  .region-content {
+    padding: 0;
+    @extend .row;
+  }
+  .region-post-content-1-wrapper,
+  .region-post-content-2-wrapper,
+  .region-post-content-3-wrapper,
+  .region-post-content-5-wrapper {
+    background-color: #f6f6f6;
+  }
+  .region-post-content-2-wrapper,
+  .region-post-content-6-wrapper {
+    padding: 0;
+  }
+  .region-post-content-2-wrapper {
+    background-image: url(#{$image_path}/kennedy-uccs-visit-welcome.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 33.3333%;
+    display: none;
+  }
+}
+
+
+.block-views-blockcu-news-featured,
+.block-views-blockcu-news-latest,
+.block-views-blockcu-news-media-block,
+.block-views-blockcu-news-term-featured,
+.block-views-blockcu-news-related,
+.block-views-blockcu-news-additional, 
+.block-views-blockcu-newsletters-recent-newsletters {
+  .block-title {
+    position: relative;
+    z-index: 0;
+    margin: 0;
+    span {
+      display: inline-block;
+      background-color: $black;
+      color: $white;
+      padding: 1.5rem 2.5rem;
+      font-size: 1.4rem;
+      line-height: 1;
+      text-transform: uppercase;
+      margin: 0 0 6rem 0;
+    }
+    &:after {
+      content: "";
+      border-top: 1px solid #9d9d9d;
+      position: absolute;
+      left: 0;
+      top: 26px;
+      z-index: -1;
+      width: 100%;
+    }
+  }
+}
+
+.block-views-blockcu-news-featured {
+  margin-bottom: 8rem;
+}
+
+.block-block-content9f7831cc-0357-46e9-9817-57e90dfd3c86 {
+  display: none;
+  @include media-breakpoint-up(md) {
+    display: none;
+    width: 50%;
+    float: left;
+    background-image: url(#{$image_path}/pillar-accent-image.jpg);
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+  }
+}
+
+.block-views-blockcu-terms-pillars {
+  @extend .col-12;
+  @extend .col-md-6;
+  padding: 10rem;
+}
+
+.block-block-contentb4d428b5-b79d-48de-9fa6-455a42c8cef9 {
+  background-image: url(#{$image_path}/banner-saliman-02.jpg);
+}
+
+.block-block-contentaf31df73-9b85-46bb-89e1-1aaa07bbd8e8 {
+  background-image: url(#{$image_path}/banner-saliman-02.jpg);
+}
+
+.block-block-contentb4d428b5-b79d-48de-9fa6-455a42c8cef9,
+.block-block-contentaf31df73-9b85-46bb-89e1-1aaa07bbd8e8 {
+  background-color: #000;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .block-inner {
+    @extend .container;
+    color: #fff;
+    .cu-quote-wrapper {
+      width: 50%;
+      float: left;
+      padding: 3rem 0;
+    }
+    .cu-quote {
+      font-size: 1.4rem;
+      line-height: 1.4;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      &::before {
+        content: open-quote;
+      }
+      &::after {
+        content: close-quote;
+      }
+    }
+    .cu-quote-author {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+  @include media-breakpoint-up(sm) {
+    .block-inner {
+      .cu-quote {
+        font-size: 1.6rem;
+      }
+      .cu-quote-author {
+        font-size: 1.6rem;
+      }
+    }
+  }
+  @include media-breakpoint-up(md) {
+    min-height: 356px;
+    .block-inner {
+      .cu-quote-wrapper {
+        width: 60%;
+        display: block;
+        padding: 0;
+      }
+      .cu-quote {
+        font-size: 2.2rem;
+      }
+      .cu-quote-author {
+        font-size: 1.8rem;
+      }
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    min-height: 460px;
+    .block-inner {
+      .cu-quote {
+        font-size: 2.8rem;
+      }
+      .cu-quote-author {
+        font-size: 2.4rem;
+      }
+    }    
+  }
+  @include media-breakpoint-up(xl) {
+    min-height: 558px;
+    .block-inner {
+      .cu-quote {
+        font-size: 3.2rem;
+      }
+      .cu-quote-author {
+        font-size: 2.8rem;
+      }
+    }
+  }
+}

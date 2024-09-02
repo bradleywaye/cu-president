@@ -1,0 +1,106 @@
+.views-subtitle {
+  font-size: 4.4rem;
+  line-height: 1.2;
+  font-weight: 200;
+  margin-bottom: 24rem;
+}
+
+.view-cu-teams {
+  h2 {
+    font-size: 2.2rem;
+    color : #000;
+    display: inline-block;
+    padding-right: 3rem;
+    font-weight: 600;
+  }
+  .views-subheader {
+    clear: both;
+    position: relative;
+    width: 100%;
+    margin-bottom: 2rem;
+    &:after {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 60%;
+      content: '\A';
+      border-top: 1px solid #ccc;
+      z-index: -1;
+    }
+  }
+  .view-content,
+  .view-header,
+  .view-footer {
+    clear: both;
+  }
+  .view-content {
+    @include clearfix();
+  }
+  > .view-content {
+    margin-bottom: 1.5rem;
+  }
+  .views-row {
+    .node {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 6rem;
+    }
+  }
+  .field--name-field-member-image {
+    margin-bottom: 2rem;
+  }
+  .field--name-node-title {
+    font-size: 1.4rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: #000;
+  }
+  .field--name-field-job-title {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #777;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  @include media-breakpoint-up(sm) {
+    .views-subheader {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      font-size: 2.6rem;
+    }
+    > .view-content {
+      margin-bottom: 2rem;
+    }
+  }
+  @include media-breakpoint-up(md) {
+    .views-subheader {
+      margin-bottom: 3.5rem;
+    }
+    h2 {
+      font-size: 3rem;
+    }
+    > .view-content {
+      margin-bottom: 2.5rem;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    .views-subheader {
+      margin-bottom: 4rem;
+    }
+    h2 {
+      font-size: 3.4rem;
+    }
+    > .view-content {
+      margin-bottom: 3rem;
+    }
+  }
+  @include media-breakpoint-up(xl) {
+    h2 {
+      font-size: 3.6rem;
+    }
+  }
+}

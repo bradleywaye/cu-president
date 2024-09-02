@@ -1,0 +1,40 @@
+id: news_sources
+label: Import news_sources
+migration_group: cup
+
+source:
+  plugin: csv
+  path: 'modules/custom/cup_migrate/data/news-sources.csv'
+  header_row_count: 1
+  keys:
+    - name
+  column_names:
+    0:
+      name: name  
+    1:
+      logo: field_source_logo
+process:
+  name: name
+  vid:
+    plugin: default_value
+    default_value: news_sources
+  _field_logo_image:
+    plugin: image_import
+    source: logo
+    alt: '@name'
+  field_source_logo:
+    plugin: entity_generate
+    entity_type: media
+    bundle: image
+    value_key: mid
+    bundle_key: vid
+    source: '@name'
+    default_values:
+      bundle: image
+      mid: null
+      vid: null    
+    values:
+      name: '@name'
+      field_media_image: '@_field_logo_image'
+destination:
+  plugin: entity:taxonomy_term

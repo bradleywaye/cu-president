@@ -1,0 +1,15 @@
+diff --git a/empty_fields.module b/empty_fields.module
+index 2c62ca2..6ef35c1 100644
+--- a/empty_fields.module
++++ b/empty_fields.module
+@@ -118,7 +118,9 @@ function empty_fields_entity_display_build_alter(&$build, $context) {
+       $plugin = $manager->createInstance($handler, $configuration);
+       $definition = $entity->get($field_name)->getFieldDefinition();
+       $component = $display->getComponent($field_name);
+-
++      $context['field'] = $definition;
++      $context['component'] = $component;
++      
+       $build[$field_name] = [
+         '#theme' => 'field',
+         '#title' => $definition->getLabel(),

@@ -1,0 +1,5 @@
+gin_admin_theme_override:
+  version: VERSION
+  css:
+    theme:
+      css/gin_admin_theme_override.css: {}

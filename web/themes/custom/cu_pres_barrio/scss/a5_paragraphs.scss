@@ -1,0 +1,12 @@
+// Default variables.
+@import "variables";
+
+// Bootstrap
+@import '../node_modules/bootstrap/scss/bootstrap-grid';
+
+// Paragraphs
+@import "paragraphs/paragraphs";
+@import "paragraphs/header";
+@import "paragraphs/row";
+@import "paragraphs/pride_points";
+@import "paragraphs/embed";

@@ -1,0 +1,5 @@
+services:
+  cup_tweaks.commands:
+    class: \Drupal\cup_tweaks\Commands\MediaMigrateCommands
+    tags:
+      - { name: drush.command }

@@ -1,0 +1,5 @@
+services:  
+  cup_tweaks.route_subscriber:
+    class: Drupal\cup_tweaks\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }

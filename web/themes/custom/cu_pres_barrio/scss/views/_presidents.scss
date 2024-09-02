@@ -1,0 +1,27 @@
+.view-cu-past-presidents {
+  .views-row {
+    .node {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 6rem;
+    }
+  }
+  .view-content {
+    @include clearfix();
+  }
+  .field--name-field-presidents-image {
+    margin-bottom: 2rem;
+  }  
+  .field--name-node-title {
+    font-size: 1.4rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: #000;
+  }
+  .field--name-field-presidents-dates {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #777;
+  }
+}
